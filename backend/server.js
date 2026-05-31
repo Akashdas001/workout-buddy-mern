@@ -9,7 +9,7 @@ const dotenv = require("dotenv");
 //importing workout.js
 const workoutRoutes = require("./routes/workout");
 // importing userroutes
-const userRoutes = require("./routes/User")
+const userRoutes = require("./routes/User");
 
 // import mongoose
 const mongoose = require("mongoose");
@@ -22,15 +22,20 @@ const app = express();
 
 // create port number
 // initilize our port number using env file
-const PORT = process.env.PORT;
+// const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 
 //middleware
 app.use(cors());
-app.use(express.json());
+// app.use(express.json());
+// app.use((req, res, next) => {
+//   (console.log(req.path, req.method),
+//    next());
+// });
 app.use((req, res, next) => {
-  (console.log(req.path, req.method), next());
+  console.log(req.path, req.method);
+  next();
 });
-
 //routes
 app.get("/", (req, res) => {
   res.json({
@@ -40,7 +45,7 @@ app.get("/", (req, res) => {
 
 //use the workoutRoutes
 app.use("/api/workouts/", workoutRoutes);
-app.use("/api/user/",userRoutes)
+app.use("/api/user/", userRoutes);
 
 // connect to db
 mongoose
