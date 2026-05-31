@@ -52,7 +52,7 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     // listen for requests
-    app.listen(PORT, () => {
+    app.listen(PORT,'0.0.0.0', () => {
       console.log(`DB Connected`);
       console.log(`server is running on port: http://localhost:${PORT}`);
     });
